@@ -20,7 +20,7 @@ wait_for_pi() {
 # --- Start Sequence ---
 
 log "Step 1: SSH into Pi to stop sensors and transfer atmospheric data"
-ssh "$PI_USER@$PI_IP" <<EOF
+ssh -t "$PI_USER@$PI_IP" <<EOF
     bash $PI_HOME/scripts/transfer_atmo_data.sh
     bash $PI_HOME/scripts/stop_soil_sensor.sh
     sudo reboot
@@ -32,7 +32,7 @@ log "Step 2: Pull data from Raspberry Pi"
 rsync -avz "$PI_USER@$PI_IP:$REMOTE_DATA_DIR/" "$LOCAL_DATA_DIR/"
 
 log "Step 3: Restart soil sensor script"
-ssh "$PI_USER@$PI_IP" "bash $PI_HOME/scripts/start_soil_sensor.sh"
+ssh -t "$PI_USER@$PI_IP" "bash $PI_HOME/scripts/start_soil_sensor.sh"
 
 
 # log "Step 4: Transfer collected data to final destination"
