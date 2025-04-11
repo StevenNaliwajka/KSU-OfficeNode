@@ -4,7 +4,7 @@ set -euo pipefail
 
 # Load config
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "$SCRIPT_DIR/config.env"
+source "$SCRIPT_DIR/Config/config.env"
 
 log() {
     echo "$(date +'%Y-%m-%d %H:%M:%S') -- $1"
