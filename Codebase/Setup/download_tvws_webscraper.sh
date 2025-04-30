@@ -7,6 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CODEBASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 TARGET_DIR="$CODEBASE_DIR/TVWS"
 REPO_URL="https://github.com/StevenNaliwajka/TVWSDataScraper.git"
+VENV_DIR="$CODEBASE_DIR/../venv"
 
 echo "Downloading TVWS webscraper..."
 
@@ -20,14 +21,9 @@ else
     git clone "$REPO_URL" "$TARGET_DIR"
 fi
 
-# If there’s a requirements.txt, install dependencies in a virtualenv
-if [[ -f "$TARGET_DIR/requirements.txt" ]]; then
-    echo "Setting up Python virtual environment..."
-    python3 -m venv "$TARGET_DIR/venv"
-    source "$TARGET_DIR/venv/bin/activate"
-    pip install --upgrade pip
-    pip install -r "$TARGET_DIR/requirements.txt"
-    deactivate
-fi
+# Setup TVWS
+source "$VENV_DIR/bin/activate"
+bash $TARGET_DIR/setup.sh
+deactivate
 
 echo "TVWS webscraper is downloaded and ready in: $TARGET_DIR"
