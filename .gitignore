@@ -172,3 +172,12 @@ cython_debug/
 .idea
 Config
 Codebase/TVWS/
+Config
+CSVOutput/
+CSVOutput/*
+.env
+.json
+.idea/
+__pycache__/
+Firefox/
+venv/
